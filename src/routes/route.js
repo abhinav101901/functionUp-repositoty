@@ -74,4 +74,74 @@ router.get("/shoes", function(req, res){
     res.send("dummy shoes response")
 })
 
+//==========================================================================================
+router.get('/film',function(req,res){
+    const movie = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+    res.send(movie) 
+})
+
+router.get('/film/:index',function(req,res){
+    const movie = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+    res.send(movie[req.params.index])
+})
+
+router.get('/film/:index',function(req,res){
+    const movie = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+    if(req.params.index > 3){
+        res.send("use a valid index")
+    }else
+    {res.send(movie[req.params.index])}
+    
+})
+
+router.get('/films',function(req,res){
+    const films = [ {
+       'id': 1,
+       'name': 'The Shining'
+      }, {
+       'id': 2,
+       'name': 'Incendies'
+      }, {
+       'id': 3,
+       'name': 'Rang de Basanti'
+      }, {
+       'id': 4,
+       'name': 'Finding Nemo'
+      }] 
+   let film =[]
+    films.forEach(a => {
+       film.push(a.name)
+    })
+   res.send(film)   
+})
+
+
+
+router.get('/films/:filmId',function(req,res){
+    const films = [ {
+        'id': 1,
+        'name': 'The Shining'
+       }, {
+        'id': 2,
+        'name': 'Incendies'
+       }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+       }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+       }]
+    let i=0
+    const b=req.params.filmId
+    for(i=0;i<films.length;i++){
+        if(b==films[i].id){
+           return res.send(films[i].name)
+        }
+    }
+    if(i>=films.length){
+        res.send("No movie exists with this id")
+    }
+    res.send('I give you film Data')
+})
+
 module.exports = router;
